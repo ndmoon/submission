@@ -34,7 +34,7 @@ def create_byseason_df(df):
 
     return byseason_df
 
-mdata_df = pd.read_csv("main_data.csv")
+mdata_df = pd.read_csv("../dashboard/main_data.csv")
 
 datetime_columns = ["dteday", "date"]
 mdata_df.sort_values(by="dteday", inplace=True)
