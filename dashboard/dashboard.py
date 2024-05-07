@@ -98,57 +98,61 @@ ax.tick_params(axis='x', labelsize=15)
 
 st.pyplot(fig)
 
+st.subheader("Pemakaian Berdasarkan Jam")
 plot_data = main_df['hr']
 
 fig, ax = plt.subplots()
 ax.hist(plot_data, bins=50, color="#90CAF9")
 ax.set_xlabel('Hour')
 ax.set_ylabel('instant')
-ax.set_title('By Hour')
+# ax.set_title('By Hour')
 
 st.pyplot(fig)
 
-st.subheader("By Month and Season")
+st.subheader("Pemakaian Berdasarkan Bulan")
 
-col1, col2 = st.columns(2)
+# col1, col2 = st.columns(2)
 
-with col1:
-    fig, ax = plt.subplots(figsize=(30, 15))
+# with col1:
+fig, ax = plt.subplots(figsize=(40, 25))
  
-    colors = ["#D3D3D3", "#72BCD4", "#D3D3D3", "#D3D3D3", "#72BCD4", "#D3D3D3", "#D3D3D3", "#D3D3D3", "#D3D3D3", "#D3D3D3","#D3D3D3", "#D3D3D3"]
+colors = ["#D3D3D3", "#72BCD4", "#D3D3D3", "#D3D3D3", "#72BCD4", "#D3D3D3", "#D3D3D3", "#D3D3D3", "#D3D3D3", "#D3D3D3","#D3D3D3", "#D3D3D3"]
 
-    sns.barplot(
-        y="instant_count", 
-        x="mnth",
-        data=bymonth_df.sort_values(by="instant_count", ascending=False),
-        palette=colors,
-        ax=ax
-    )
+sns.barplot(
+    y="instant_count", 
+    x="mnth",
+    data=bymonth_df.sort_values(by="instant_count", ascending=False),
+    palette=colors,
+    ax=ax
+)
     # ax.set_title("by Month", loc="center", fontsize=50)
-    ax.set_ylabel(None)
-    ax.set_xlabel(None)
-    ax.tick_params(axis='x', labelsize=35)
-    ax.tick_params(axis='y', labelsize=30)
-    st.pyplot(fig)
+ax.set_ylabel(None)
+ax.set_xlabel(None)
+ax.tick_params(axis='x', labelsize=35)
+ax.tick_params(axis='y', labelsize=30)
+st.pyplot(fig)
 
-with col2:
-    fig, ax = plt.subplots(figsize=(30, 15))
+st.subheader("Pemakaian Berdasarkan Musim")
+# with col2:
+fig, ax = plt.subplots(figsize=(40, 25))
     
-    colors = ["#90CAF9", "#D3D3D3", "#90CAF9", "#D3D3D3"]
+colors = ["#90CAF9", "#D3D3D3", "#90CAF9", "#D3D3D3"]
  
-    sns.barplot(
-        y="instant", 
-        x="season_group",
-        data=byseason_df.sort_values(by="season_group", ascending=False),
-        palette=colors,
-        ax=ax
-    )
+sns.barplot(
+    y="instant", 
+    x="season_group",
+    data=byseason_df.sort_values(by="season_group", ascending=False),
+    palette=colors,
+    ax=ax
+)
     # ax.set_title("by Season", loc="center", fontsize=50)
-    ax.set_ylabel(None)
-    ax.set_xlabel(None)
-    ax.tick_params(axis='x', labelsize=35)
-    ax.tick_params(axis='y', labelsize=30)
-    st.pyplot(fig)
+ax.set_ylabel(None)
+ax.set_xlabel(None)
+ax.tick_params(axis='x', labelsize=35)
+ax.tick_params(axis='y', labelsize=30)
+st.pyplot(fig)
+
+st.subheader("Pemakaian Berdasarkan Bulan dan Musim")
 
 vega_data = mdata_df.head(9000)[["instant", "mnth", "season"]]
 
@@ -167,13 +171,13 @@ st.vega_lite_chart(
    height=400
 )
 
-st.subheader("By Holiday, Weekday, and Workingday")
+st.subheader("Pemakaian Berdasarkan Holiday, Weekday, and Workingday")
 
 chart_data = mdata_df.head(500)[["holiday", "weekday", "workingday"]]
 
 st.line_chart(chart_data)
 
-st.subheader("By Year, Season, and Month")
+st.subheader("Pemakaian Berdasarkan Year, Season, and Month")
 schart_data = mdata_df.head(9000)[["yr", "season", "mnth"]]
 st.scatter_chart(schart_data)
 
