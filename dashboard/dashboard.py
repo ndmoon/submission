@@ -98,20 +98,13 @@ ax.tick_params(axis='x', labelsize=15)
 
 st.pyplot(fig)
 
-st.subheader("By Holiday, Weekday, and Workingday")
-
-chart_data = mdata_df.head(500)[["holiday", "weekday", "workingday"]]
-
-st.line_chart(chart_data)
-st.scatter_chart(chart_data)
-
-plot_data = main_df['temp']
+plot_data = main_df['hr']
 
 fig, ax = plt.subplots()
 ax.hist(plot_data, bins=50, color="#90CAF9")
-ax.set_xlabel('Temp')
+ax.set_xlabel('Hour')
 ax.set_ylabel('instant')
-ax.set_title('By Temp')
+ax.set_title('By Hour')
 
 st.pyplot(fig)
 
@@ -122,7 +115,7 @@ col1, col2 = st.columns(2)
 with col1:
     fig, ax = plt.subplots(figsize=(30, 15))
  
-    colors = ["#90CAF9", "#D3D3D3", "#90CAF9", "#D3D3D3", "#90CAF9"]
+    colors = ["#D3D3D3", "#72BCD4", "#D3D3D3", "#D3D3D3", "#72BCD4", "#D3D3D3", "#D3D3D3", "#D3D3D3", "#D3D3D3", "#D3D3D3","#D3D3D3", "#D3D3D3"]
 
     sns.barplot(
         y="instant_count", 
@@ -137,7 +130,6 @@ with col1:
     ax.tick_params(axis='x', labelsize=35)
     ax.tick_params(axis='y', labelsize=30)
     st.pyplot(fig)
-
 
 with col2:
     fig, ax = plt.subplots(figsize=(30, 15))
@@ -158,7 +150,7 @@ with col2:
     ax.tick_params(axis='y', labelsize=30)
     st.pyplot(fig)
 
-vega_data = mdata_df.head(500)[["instant", "mnth", "season"]]
+vega_data = mdata_df.head(9000)[["instant", "mnth", "season"]]
 
 st.vega_lite_chart(
    vega_data,
@@ -174,5 +166,16 @@ st.vega_lite_chart(
    width=800,
    height=400
 )
+
+st.subheader("By Holiday, Weekday, and Workingday")
+
+chart_data = mdata_df.head(500)[["holiday", "weekday", "workingday"]]
+
+st.line_chart(chart_data)
+
+st.subheader("By Year, Season, and Month")
+schart_data = mdata_df.head(9000)[["yr", "season", "mnth"]]
+st.scatter_chart(schart_data)
+
 
 st.caption('Copyright Nadia 2024')
